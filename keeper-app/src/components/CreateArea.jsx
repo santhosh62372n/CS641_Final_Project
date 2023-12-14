@@ -18,7 +18,7 @@ function CreateArea(props) {
   }
 
   function submitNote(event) {
-    fetch('http://localhost:3000/api/notes', {  // Update the port if your React app runs on a different port
+    fetch('http://localhost:4000/api/notes', {  // Update the port if your React app runs on a different port
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
