@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 app.use(express.json());
 app.use(cors());
@@ -31,6 +31,29 @@ app.get('/api/notes', async (req, res) => {
     res.json(notes);
   } catch (error) {
     res.status(500).json({ error: 'Failed to retrieve notes' });
+  }
+});
+// Add this route to handle note deletion
+app.delete('/api/notes/:index', async (req, res) => {
+  const { index } = req.params;
+
+  try {
+    // Assuming the notes are stored in an array or another data structure
+    // If using MongoDB, you might need to modify this logic based on your data structure
+    const notes = await Note.findOneAndDelete({ _id: index});
+    console.log(notes)
+    if (index >= 0 && index < notes.length) {
+      // Remove the note at the specified index
+      notes.splice(index, 1);
+
+      // Update the database or data structure accordingly
+      // In this example, we're not updating the database, just returning the updated notes array
+      res.json(notes);
+    } else {
+      res.status(404).json({ error: 'Note not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to delete note' });
   }
 });
 
