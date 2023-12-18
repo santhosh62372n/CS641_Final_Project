@@ -8,8 +8,8 @@ const PORT = process.env.PORT || 4000;
 
 app.use(express.json());
 app.use(cors());
-//mongodb+srv://santhu:vTOln5LwinZgPwwT@santhosh.z36snbm.mongodb.net/keeperdb
-mongoose.connect('http://172.17.1.80:6435', {
+
+mongoose.connect('mongodb+srv://santhu:vTOln5LwinZgPwwT@santhosh.z36snbm.mongodb.net/keeperdb', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
